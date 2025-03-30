@@ -1,38 +1,9 @@
-from langchain_ollama import OllamaLLM
-from langchain.prompts import PromptTemplate
-import json
+from models import TweetGenerator
+import os
+from rich.console import Console
+from rich.panel import Panel
 
-def generate_tweets(text, num_tweets):
-    # Initialize Ollama
-    llm = OllamaLLM(model="llama3")
-    
-    # Create prompt template
-    prompt_template = PromptTemplate(
-        input_variables=["text", "num_tweets"],
-        template="""Based on the following text, generate {num_tweets} engaging tweets. 
-        Make them concise, informative, and engaging. Each tweet should be under 280 characters.
-        Format the response as a JSON array of strings.
-        
-        Text: {text}
-        
-        Tweets:"""
-    )
-    
-    try:
-        # Generate the prompt
-        prompt = prompt_template.format(text=text, num_tweets=num_tweets)
-        
-        # Generate response
-        response = llm.invoke(prompt)
-        
-        # Clean up the response to ensure it's valid JSON
-        generated_text = response.strip('[]').split('\n')
-        tweets = [tweet.strip().strip('"') for tweet in generated_text if tweet.strip()]
-        
-        return tweets
-    except Exception as e:
-        print(f"Error generating tweets: {str(e)}")
-        return []
+console = Console()
 
 def get_valid_number():
     while True:
@@ -40,15 +11,18 @@ def get_valid_number():
             num = int(input("How many tweets would you like to generate? (1-5): "))
             if 1 <= num <= 5:
                 return num
-            print("Please enter a number between 1 and 5.")
+            console.print("[red]Please enter a number between 1 and 5.[/red]")
         except ValueError:
-            print("Please enter a valid number.")
+            console.print("[red]Please enter a valid number.[/red]")
 
 def main():
-    print("\n=== Tweet Generator using Llama 3 ===\n")
+    console.print(Panel.fit(
+        "[bold blue]Tweet Generator 🐦[/bold blue]",
+        title="Welcome"
+    ))
     
     # Get input text
-    print("Enter your text (press Enter twice to finish):")
+    console.print("\nEnter your text (press Enter twice to finish):")
     lines = []
     while True:
         line = input()
@@ -60,39 +34,41 @@ def main():
     text = "\n".join(lines).strip()
     
     if not text:
-        print("Input text cannot be empty")
+        console.print("[red]Input text cannot be empty[/red]")
         return
     
     # Get number of tweets
     num_tweets = get_valid_number()
     
-    print(f"\nGenerating {num_tweets} tweets from the following text:\n")
-    print("-" * 50)
-    print(text)
-    print("-" * 50)
-    print("\nGenerating tweets...\n")
+    console.print(f"\nGenerating {num_tweets} tweets from the following text:\n")
+    console.print(Panel(text, title="Input Text"))
     
-    tweets = generate_tweets(text, num_tweets)
-    
-    if tweets:
-        print("Generated Tweets:")
-        print("-" * 50)
-        for i, tweet in enumerate(tweets, 1):
-            print(f"{i}. {tweet}")
-    else:
-        print("No tweets were generated.")
+    try:
+        with console.status("[bold green]Generating tweets...[/bold green]"):
+            generator = TweetGenerator(model_type="ollama", model_name="llama2")
+            tweets = generator.generate_tweets(text, num_tweets)
+        
+        if tweets:
+            console.print("\n[bold green]Generated Tweets:[/bold green]")
+            for i, tweet in enumerate(tweets, 1):
+                console.print(Panel(tweet, title=f"Tweet {i} 🐦"))
+        else:
+            console.print("[red]No tweets were generated.[/red]")
+            
+    except Exception as e:
+        console.print(f"[red]Error: {str(e)}[/red]")
     
     # Ask if user wants to generate more tweets
     while True:
         again = input("\nWould you like to generate more tweets? (y/n): ").lower()
         if again in ['y', 'n']:
             break
-        print("Please enter 'y' or 'n'")
+        console.print("[red]Please enter 'y' or 'n'[/red]")
     
     if again == 'y':
         main()
     else:
-        print("\nThank you for using Tweet Generator!")
+        console.print("\n[bold blue]Thank you for using Tweet Generator![/bold blue]")
 
 if __name__ == "__main__":
     main() 

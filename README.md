@@ -1,11 +1,12 @@
-# Tweet Generator with Llama 3
+# Tweet Generator 
 
-A tweet generation tool using LangChain, Ollama, and Llama 3. Available in both Streamlit web interface and command-line versions.
+A powerful tool that generates engaging tweets using AI models. Built with LangChain and supporting both Ollama and Hugging Face models.
 
 ## 📋 Prerequisites
 
-1. Python 3.8 or higher
-2. Ollama installed on your system
+- Python 3.8 or higher
+- Ollama installed and running (for local model usage)
+- Hugging Face API token (for cloud model usage)
 
 ## 🚀 Installation
 
@@ -22,23 +23,28 @@ A tweet generation tool using LangChain, Ollama, and Llama 3. Available in both 
    ollama pull llama3
    ```
 
-3. Install Python dependencies:
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/tweet_generator.git
+   cd tweet_generator
+   ```
+
+4. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-## 🔍 Testing Ollama Installation
+5. For Hugging Face usage, set up your API token:
+   ```bash
+   export HUGGINGFACE_API_TOKEN=your_token_here
+   ```
 
-Before running the application, you can test if Ollama is working correctly:
+## 🔍 Testing
 
+To test if Ollama is working correctly:
 ```bash
 python test_ollama.py
 ```
-
-This will:
-1. Test the connection to Ollama
-2. Verify the model is available
-3. Try a simple prompt to ensure everything is working
 
 ### ⚠️ Troubleshooting Ollama Service
 
@@ -66,52 +72,60 @@ If you encounter issues with the Ollama service:
 
 ## 🎮 Running the Application
 
-### 🌐 Web Interface (Streamlit)
+### 🌐 Web Interface
 
-1. Make sure Ollama is running in the background
-2. Start the Streamlit app:
-   ```bash
-   streamlit run app.py
-   ```
-3. Open your web browser and navigate to the URL shown in the terminal (typically http://localhost:8501)
+Run the Streamlit app:
+```bash
+streamlit run app.py
+```
 
 ### 💻 Command Line Interface
 
-1. Make sure Ollama is running in the background
-2. Run the CLI version:
-   ```bash
-   python cli.py
-   ```
-3. Follow the interactive prompts:
-   - Enter your text (press Enter twice to finish)
-   - Specify the number of tweets you want to generate (1-5)
-   - Choose whether to generate more tweets
+Run the CLI version:
+```bash
+python cli.py
+```
+
+Follow the interactive prompts:
+- Enter your text (press Enter twice to finish)
+- Specify the number of tweets you want to generate (1-5)
+- Choose whether to generate more tweets
 
 ## 📖 Usage
 
-### 🌐 Web Interface
-1. Enter your text in the input text area
-2. Select the number of tweets you want to generate (1-5)
-3. Click "Generate Tweets"
-4. View your generated tweets
-
-### 💻 Command Line
-1. Run the program
-2. Enter your text when prompted (press Enter twice to finish)
-3. Enter the number of tweets you want to generate
-4. View the generated tweets
-5. Choose whether to generate more tweets
+1. Enter your text in the input field
+2. Select the number of tweets to generate (1-5)
+3. Choose your preferred model type (Ollama or Hugging Face)
+4. Click "Generate Tweets" or run the CLI command
+5. View your generated tweets!
 
 ## ✨ Features
 
-- Generate 1-5 tweets from input text
-- Uses LangChain with Ollama and Llama 2 for natural language generation
-- Structured prompt templates for better tweet generation
-- Available in both web and command-line interfaces
-- Real-time tweet generation
-- Interactive command-line interface
-- Option to generate multiple sets of tweets in one session
+- Support for both local (Ollama) and cloud (Hugging Face) models
+- Web interface with Streamlit
+- Command-line interface with rich formatting
+- Customizable number of tweets
+- Beautiful UI with emojis and modern design
+- Error handling and user feedback
 
-## ⚠️ Note
+## ⚠️ Notes and Troubleshooting
 
-Make sure Ollama is running before starting either version of the application. The application uses LangChain's Ollama integration to communicate with the local Ollama instance.
+### Ollama
+- Make sure Ollama is running before using the application
+- Default model is "llama2"
+- You can change the model in the sidebar or CLI arguments
+
+### Hugging Face
+- Requires a valid API token
+- Token can be provided via environment variable or CLI argument
+- Default model is "meta-llama/Llama-2-7b-chat-hf"
+- You can use any other model from Hugging Face Hub
+
+### Common Issues
+- If you get connection errors with Ollama, ensure the service is running
+- For Hugging Face errors, verify your API token is valid
+- Check your internet connection when using cloud models
+
+## 📝 License
+
+MIT License - feel free to use this project for your own purposes!

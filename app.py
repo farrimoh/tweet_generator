@@ -33,7 +33,7 @@ if model_type == "huggingface":
 else:
     model_name = st.sidebar.text_input(
         "Ollama Model Name",
-        value="llama2",
+        value="llama3",
         help="Enter the Ollama model name"
     )
 

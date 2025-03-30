@@ -26,7 +26,7 @@ def test_ollama():
     try:
         # Try to initialize Ollama
         print("1. Testing Ollama connection...")
-        llm = OllamaLLM(model="llama3")  # Changed from llama3 to llama2
+        llm = OllamaLLM(model="llama3")  
         
         # Try a simple prompt
         print("2. Testing model response...")
@@ -46,7 +46,7 @@ def test_ollama():
         print(f"Error message: {str(e)}")
         print("\nPlease check:")
         print("1. Is Ollama installed?")
-        print("2. Is the llama2 model pulled? (Try running 'ollama pull llama2')")
+        print("2. Is the llama3 model pulled? (Try running 'ollama pull llama3')")
         print("3. If needed, try restarting Ollama")
         return False
 

@@ -1,4 +1,4 @@
-# Tweet Generator 
+# Tweet Generator 🐦
 
 A powerful tool that generates engaging tweets using AI models. Built with LangChain and supporting both Ollama and Hugging Face models.
 
@@ -35,9 +35,16 @@ A powerful tool that generates engaging tweets using AI models. Built with LangC
    ```
 
 5. For Hugging Face usage, set up your API token:
-   ```bash
-   export HUGGINGFACE_API_TOKEN=your_token_here
-   ```
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Edit the `.env` file and replace `your_token_here` with your actual Hugging Face API token
+   - You can get your token from [Hugging Face Settings](https://huggingface.co/settings/tokens)
+   - Alternatively, you can set the token as an environment variable:
+     ```bash
+     export HUGGINGFACE_API_TOKEN=your_token_here
+     ```
 
 ## 🔍 Testing
 
@@ -65,9 +72,9 @@ If you encounter issues with the Ollama service:
 2. If Ollama isn't responding:
    - Check if the service is running
    - Try restarting your computer
-   - Make sure the llama2 model is pulled:
+   - Make sure the llama3 model is pulled:
      ```bash
-     ollama pull llama2
+     ollama pull llama3
      ```
 
 ## 🎮 Running the Application
@@ -107,17 +114,18 @@ Follow the interactive prompts:
 - Customizable number of tweets
 - Beautiful UI with emojis and modern design
 - Error handling and user feedback
+- Environment variable support via .env file
 
 ## ⚠️ Notes and Troubleshooting
 
 ### Ollama
 - Make sure Ollama is running before using the application
-- Default model is "llama2"
+- Default model is "llama3"
 - You can change the model in the sidebar or CLI arguments
 
 ### Hugging Face
 - Requires a valid API token
-- Token can be provided via environment variable or CLI argument
+- Token can be provided via .env file or environment variable
 - Default model is "meta-llama/Llama-2-7b-chat-hf"
 - You can use any other model from Hugging Face Hub
 
@@ -125,6 +133,7 @@ Follow the interactive prompts:
 - If you get connection errors with Ollama, ensure the service is running
 - For Hugging Face errors, verify your API token is valid
 - Check your internet connection when using cloud models
+- Make sure your .env file is in the project root directory
 
 ## 📝 License
 

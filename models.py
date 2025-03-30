@@ -3,9 +3,13 @@ from langchain_community.llms import HuggingFaceHub
 from langchain.prompts import PromptTemplate
 import os
 from typing import Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class TweetGenerator:
-    def __init__(self, model_type: str = "ollama", model_name: str = "llama2"):
+    def __init__(self, model_type: str = "ollama", model_name: str = "llama3"):
         """
         Initialize the tweet generator with either Ollama or Hugging Face model.
         
@@ -22,12 +26,17 @@ class TweetGenerator:
         if self.model_type == "ollama":
             return OllamaLLM(model=self.model_name)
         elif self.model_type == "huggingface":
-            if not os.getenv("HUGGINGFACE_API_TOKEN"):
-                raise ValueError("HUGGINGFACE_API_TOKEN environment variable is required for Hugging Face models")
+            # Try to get token from environment variable or .env file
+            hf_token = os.getenv("HUGGINGFACE_API_TOKEN")
+            if not hf_token:
+                raise ValueError(
+                    "HUGGINGFACE_API_TOKEN not found. Please set it in your environment "
+                    "or create a .env file with HUGGINGFACE_API_TOKEN=your_token_here"
+                )
             return HuggingFaceHub(
                 repo_id=self.model_name,
                 model_kwargs={"temperature": 0.7},
-                huggingfacehub_api_token=os.getenv("HUGGINGFACE_API_TOKEN")
+                huggingfacehub_api_token=hf_token
             )
         else:
             raise ValueError(f"Unsupported model type: {self.model_type}")

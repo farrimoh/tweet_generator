@@ -1,4 +1,5 @@
 # 🐦 Tweet Generator for Research Labs & LLM Learners
+![Tweet Generator Demo](tweet-generator.png)
 
 Easily draft a connected thread of up to 5 tweets to share new papers and findings. Perfect for research labs and anyone learning to use local LLMs like LLaMA 3 — explore prompt design, app building, and local inference all in one simple project.
 

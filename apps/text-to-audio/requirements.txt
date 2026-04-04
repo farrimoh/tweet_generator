@@ -1,0 +1,8 @@
+streamlit
+azure-cognitiveservices-speech
+langchain
+langchain-community
+pypdf
+requests
+beautifulsoup4
+python-dotenv

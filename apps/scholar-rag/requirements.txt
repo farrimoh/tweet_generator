@@ -1,0 +1,5 @@
+azure-search-documents>=11.4.0
+azure-core>=1.29.0
+openai>=1.0.0
+python-dotenv>=1.0.0
+gradio>=4.0.0 

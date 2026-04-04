@@ -1,0 +1,32 @@
+# =============================================
+# Azure Cognitive Search Configuration
+# =============================================
+# Get these values from your Azure Cognitive Search service in the Azure portal
+# Service name is the name you gave your search service
+# API key can be found under "Keys" in your search service
+AZURE_SEARCH_SERVICE_ENDPOINT=your-search-service-name
+AZURE_SEARCH_API_KEY=your-search-api-key
+
+# =============================================
+# Azure OpenAI Configuration
+# =============================================
+# Get these values from your Azure OpenAI service in the Azure portal
+# API key can be found under "Keys and Endpoint" in your OpenAI service
+# Endpoint URL is the full URL of your OpenAI service
+# Deployment name is the name of your deployed model
+AZURE_OPENAI_API_KEY=your-openai-api-key
+AZURE_OPENAI_ENDPOINT=https://your-openai-resource-name.openai.azure.com/
+AZURE_OPENAI_DEPLOYMENT_NAME=your-deployment-name
+
+# =============================================
+# Optional Configuration
+# =============================================
+# Uncomment and modify if you need to use a specific API version
+# AZURE_OPENAI_API_VERSION=2023-05-15
+
+# =============================================
+# Instructions:
+# 1. Copy this file to .env
+# 2. Replace placeholder values with your actual credentials
+# 3. Never commit .env to version control
+# ============================================= 
